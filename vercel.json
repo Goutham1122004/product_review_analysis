@@ -1,15 +1,16 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "product_review/app.py",
-      "use": "@vercel/python",
-      "config": {
-        "runtime": "python3.11"
+    "version": 2,
+    "builds": [
+      {
+        "src": "./app.py",
+        "use": "@vercel/python",
+        "config": {
+          "runtime": "python3.11"
+        }
       }
-    }
-  ],
-  "routes": [
-    { "src": "/(.*)", "dest": "product_review/app.py" }
-  ]
-}
+    ],
+    "routes": [
+      { "src": "/(.*)", "dest": "app.py" }
+    ]
+  }
+  
