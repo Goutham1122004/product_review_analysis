@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Review System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #282828; /* Dark background color */
+            color: #fff; /* Text color */
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #363636; /* Lighter background color */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid #444; /* Border color */
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #fff; /* Heading color */
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            border: 1px solid #555; /* Input border color */
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: #444; /* Input background color */
+            color: #fff; /* Input text color */
+        }
+
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #fff; /* Input border color on focus */
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        label {
+            font-weight: bold;
+            color: #fff; /* Label text color */
+        }
+
+        .result {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        .result p {
+            margin-bottom: 10px;
+        }
+
+        .previous-reviews {
+            margin-top: 20px;
+        }
+
+        .previous-reviews h2 {
+            color: #fff;
+        }
+
+        .previous-reviews ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .previous-reviews li {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Product Review System</h1>
+        <div id="submissionForm">
+            <form id="reviewForm" method="post" action="/">
+                <label for="productName">Product Name:</label>
+                <input type="text" id="productName" name="productName" required>
+
+                <label for="rating">Rating:</label>
+                <select id="rating" name="rating" required>
+                    <option value="5">5 - Excellent</option>
+                    <option value="4">4 - Good</option>
+                    <option value="3">3 - Average</option>
+                    <option value="2">2 - Poor</option>
+                    <option value="1">1 - Very Poor</option>
+                </select>
+
+                <label for="review">Review:</label>
+                <textarea id="review" name="review" rows="6" required></textarea>
+
+                <label for="recommendation">Recommendation:</label>
+                <select id="recommendation" name="recommendation" required>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+
+                <input type="submit" value="Submit Review">
+            </form>
+        </div>
+
+        {% if message %}
+        <div class="result">
+            <p>{{ message }}</p>
+            <p>Sentiment: {{ sentiment }}</p>
+        </div>
+        {% endif %}
+
+        {% if previous_reviews %}
+        <div class="previous-reviews">
+            <h2>Previous Reviews:</h2>
+            <ul>
+                {% for review in previous_reviews %}
+                <li>
+                    <strong>Product Name:</strong> {{ review.product_name }}<br>
+                    <strong>Rating:</strong> {{ review.rating }}<br>
+                    <strong>Review:</strong> {{ review.review }}<br>
+                    <strong>Recommendation:</strong> {{ review.recommendation }}<br>
+                    <strong>Sentiment:</strong> {{ review.sentiment }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
